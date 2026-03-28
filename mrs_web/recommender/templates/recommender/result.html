@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Analysis Result</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00f2fe;
+      --secondary: #4facfe;
+      --accent: #7000ff;
+      --bg-dark: #060912;
+      --panel-glass: rgba(15, 23, 42, 0.85);
+      --text-bright: #f8fafc;
+      --text-dim: #94a3b8;
+      --card-border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
+      --medical-blue: rgba(0, 242, 254, 0.1);
+      --lifestyle-purple: rgba(112, 0, 255, 0.1);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--text-bright);
+      background: var(--bg-dark);
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: 
+        radial-gradient(circle at 100% 0%, rgba(0, 242, 254, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 0% 100%, rgba(112, 0, 255, 0.15) 0%, transparent 40%);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      background: var(--panel-glass);
+      backdrop-filter: blur(20px);
+      border-radius: 28px;
+      border: 1px solid var(--card-border);
+      padding: 40px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-section {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-family: "Outfit", sans-serif;
+      font-size: 2.5rem;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0 0 10px;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid var(--success);
+      color: var(--success);
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .description {
+      color: var(--text-dim);
+      max-width: 700px;
+      margin: 20px auto;
+      line-height: 1.6;
+    }
+
+    /* Comparison Table Styling */
+    .comparison-wrapper {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.02);
+      margin-top: 30px;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .comparison-table th {
+      padding: 20px;
+      font-family: "Outfit", sans-serif;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .th-medical { 
+      background: var(--medical-blue); 
+      color: var(--primary); 
+    }
+
+    .th-lifestyle { 
+      background: var(--lifestyle-purple); 
+      color: #b180ff; 
+    }
+
+    .comparison-table td {
+      vertical-align: top;
+      padding: 24px;
+      border: 1px solid var(--card-border);
+    }
+
+    .comparison-table ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--text-bright);
+    }
+
+    .comparison-table li {
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    /* Small Cards for Precaution & Diet */
+    .secondary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .mini-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .mini-card h3 {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-top: 0;
+      letter-spacing: 1px;
+    }
+
+    .mini-card ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      font-size: 0.9rem;
+    }
+
+    .link-btn {
+      display: inline-block;
+      margin-top: 40px;
+      text-decoration: none;
+      color: var(--bg-dark);
+      background: var(--primary);
+      border-radius: 12px;
+      padding: 14px 28px;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    .link-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 242, 254, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .secondary-grid { grid-template-columns: 1fr; }
+      .header-section h2 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="header-section">
+      <span class="pill">Confidence Level: {{ result.confidence|floatformat:2 }}</span>
+      <h2>{{ result.disease }}</h2>
+      <p class="description">{{ result.description }}</p>
+    </section>
+
+    <div class="comparison-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th class="th-medical">💊 Medical Intervention</th>
+            <th class="th-lifestyle">🏃 Lifestyle & Fitness</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <ul>
+                {% for item in result.medications %}
+                  <li>{{ item }}</li>
+                {% empty %}
+                  <li>No specific medication recommended.</li>
+                {% endfor %}
+              </ul>
+            </td>
+            <td>
+              <ul>
+                {% for item in result.workout %}
+                  <li>{{ item }}</li>
+                {% empty %}
+                  <li>No specific workout recommended.</li>
+                {% endfor %}
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="secondary-grid">
+      <article class="mini-card">
+        <h3>🛡️ Safety Precautions</h3>
+        <ul>
+          {% for item in result.precautions %}
+            <li>{{ item }}</li>
+          {% empty %}
+            <li>Normal safety measures.</li>
+          {% endfor %}
+        </ul>
+      </article>
+
+      <article class="mini-card">
+        <h3>🥗 Dietary Guidance</h3>
+        <ul>
+          {% for item in result.diet %}
+            <li>{{ item }}</li>
+          {% empty %}
+            <li>Balanced nutrition recommended.</li>
+          {% endfor %}
+        </ul>
+      </article>
+    </div>
+
+    <div style="text-align: center;">
+      <a class="link-btn" href="/">Run New Analysis</a>
+    </div>
+  </main>
+</body>
+</html>
