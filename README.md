@@ -271,35 +271,8 @@ python manage.py runserver
 
 Open: `http://127.0.0.1:8000/`
 
-## 12. Generate Research Documents
 
-Script: `generate_research_documents.py`
-
-What it does:
-
-- reads datasets
-- evaluates saved model bundle
-- composes research-style sections
-- generates:
-- PDF report
-- DOCX report
-
-Run:
-
-```bash
-python generate_research_documents.py
-```
-
-Output files (project root):
-
-- `Medicine_Recommendation_System_Research_Report.pdf`
-- `Medicine_Recommendation_System_Research_Report.docx`
-
-Note:
-
-- If `python-docx` is missing, script auto-installs it.
-
-## 13. API Behavior (Optional JSON Mode)
+## 12. API Behavior (Optional JSON Mode)
 
 Endpoint: `POST /recommend/`
 
@@ -342,7 +315,7 @@ Validation error response:
 }
 ```
 
-## 14. Configuration Notes
+## 13. Configuration Notes
 
 Current project settings (`mrs_web/mrs_web/settings.py`):
 
@@ -357,7 +330,7 @@ Before production deployment:
 3. Restrict `ALLOWED_HOSTS`.
 4. Configure static files, HTTPS, and production server.
 
-## 15. Troubleshooting
+## 14. Troubleshooting
 
 1. Error: model artifact not found
 - Cause: training not run yet.
@@ -379,20 +352,20 @@ Before production deployment:
 - Cause: missing token or manual API call mismatch.
 - Fix: include CSRF token and proper headers for AJAX.
 
-## 16. Limitations
+## 15. Limitations
 
 - Dataset-driven and educational, not clinically validated.
 - Model quality depends fully on training data quality.
 - Current features do not include lab values or medical imaging.
 - Recommendation rules are limited and should be clinically reviewed before real-world use.
 
-## 17. Safety Disclaimer
+## 16. Safety Disclaimer
 
 This application is a decision-support learning project only.
 It does not provide medical diagnosis or treatment.
 Always consult a licensed medical professional for clinical decisions.
 
-## 18. Requirements
+## 17. Requirements
 
 Current pinned dependency ranges (`requirements.txt`):
 
@@ -403,7 +376,7 @@ Current pinned dependency ranges (`requirements.txt`):
 - joblib>=1.3.0
 - fpdf2>=2.7.0
 
-## 19. Quick Start (Shortest Path)
+## 18. Quick Start (Shortest Path)
 
 ```bash
 pip install -r requirements.txt
